@@ -1,0 +1,22 @@
+JPA notes from Daily code buffer:
+
+1. @SpringDataTest -- to be used fo testing repository layer. it saves data and then flushes.
+
+2. @AttributeOverrides({  -- this is used to override the already present column in DB and we create a class with properties that are already present in entity class and now that properties needs to be wrapped inside another class with different name
+              @AttributeOverride(
+                              name = "name",
+                              column = @Column(name = "guardian_name")
+              ),
+              @AttributeOverride(
+                              name = "email",
+                              column = @Column(name = "guardian_email")
+              )
+})
+
+3. @Id
+   @SequenceGenerator(name = "emp_seq", sequenceName = "employee_sequence", allocationSize = 1) -- this annotation avoids default hibernate sequence.
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_seq")
+
+    -- sequenceName is one sequence's name which is already present in DB. 
+       allocationSize is the number of IDs in it prefetches in one go - if this is higher then the benefit is hitting database request less number of times.
+
