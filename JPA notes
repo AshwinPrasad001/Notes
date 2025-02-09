@@ -20,3 +20,12 @@ JPA notes from Daily code buffer:
     -- sequenceName is one sequence's name which is already present in DB. 
        allocationSize is the number of IDs in it prefetches in one go - if this is higher then the benefit is hitting database request less number of times.
 
+4. save vs saveAndFlush
+    save inserts data after the process is successful
+    saveAndFlush inserts data immediately when it's called
+
+5. @Transactional
+    if method is sucessful, it commits the changes in DB otherwise it Rolls back the changes
+    used on top of a method
+    
+
