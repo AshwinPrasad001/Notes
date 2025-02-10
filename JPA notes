@@ -1,5 +1,7 @@
 JPA notes from Daily code buffer:
 
+---https://github.com/shabbirdwd53/Spring-Data-JPA-Tutorial---
+
 1. @SpringDataTest -- to be used fo testing repository layer. it saves data and then flushes.
 
 2. @AttributeOverrides({  -- this is used to override the already present column in DB and we create a class with properties that are already present in entity class and now that properties needs to be wrapped inside another class with different name
@@ -32,6 +34,56 @@ JPA query methods
 https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
 6. findByGuardianGuardianName - Guardian is object within Student class which contains guardianName as field name.
+
+7. JPQL query vs Native query
+//  JPQL
+        @Query("select s.firstName from Student s where s.emailId = ?1")
+//  Native
+        @Query(value = "SELECT * FROM tbl_student s where s.email_address = ?1", nativeQuery = true)
+//  Native Named Param
+        @Query(value = "SELECT * FROM tbl_student s where s.email_address = :emailId", nativeQuery = true)
+
+8.  @Modifying -- used when any record in table is to be modified/updated.
+    @Transactional
+    @Query(value = "update tbl_student set first_name = ?1 where email_address = ?2", nativeQuery = true)
+
+9.  @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            optional = false)
+    @JoinColumn(name = "course_id",  -- this anotation is used to denote which field in should be mapped from the other table to this table and the foreign column name in this table.
+            referencedColumnName = "courseId")
+
+   OneToOne Relationship
+10.  CascadingType - it saves the object in db along with the object defined in the class as field.
+11.  FetchType - while retrieving data from DB, if lazy, it doesnt fetch the object field(the onetoone field) data. otherwise it fetches data along with the other table using the foreign key value
+
+12. EXTRA TIP - in lombok if we need to exclude any , we can define it in brackets. for example, @ToString(exclude = "studentId') - this will excude tostring for that field
+
+13. uni directional / bi directional mapping
+    defining @OneToOne mapping in both the class' fields.
+  bi directional is done when we define "@OneToOne(mappedby = fieldName)" where fieldName is the field in another class where @OneToOne is defined.
+
+  (refer daily code buffer video timestamp- 1:36:00)
+  
+
+14. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
