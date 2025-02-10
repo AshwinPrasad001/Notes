@@ -27,5 +27,12 @@ JPA notes from Daily code buffer:
 5. @Transactional
     if method is sucessful, it commits the changes in DB otherwise it Rolls back the changes
     used on top of a method
+
+JPA query methods
+https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
+6. findByGuardianGuardianName - Guardian is object within Student class which contains guardianName as field name.
+
+
     
 
