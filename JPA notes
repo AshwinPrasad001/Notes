@@ -68,7 +68,8 @@ https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
 14. Paging and Sorting
 
-  a.  Pageable firstPagewithThreeRecords =
+  a.  PAGINATION 
+        Pageable firstPagewithThreeRecords =
                 PageRequest.of(0, 3);
         Pageable secondPageWithTwoRecords = 
                 PageRequest.of(1,2);
@@ -86,9 +87,57 @@ https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
                 .getTotalPages();
 
 
-  b.
+  b. PAGINATION WITH SORTING
 
+       Pageable sortByTitle = PageRequest.of(0,2, 
+                                  Sort.by("title"));
 
+        Pageable sortByCreditDesc =PageRequest.of(0,2,
+                                  Sort.by("credit").descending());
+
+        Pageable sortByTitleAndCreditDesc =
+                PageRequest.of(0,2,
+                        Sort.by("title")
+                        .descending()
+                        .and(Sort.by("credit")));
+        
+        List<Course> courses = courseRepository.findAll(sortByTitle).getContent();
+
+c. 
+
+    Page<Course> findByTitleContaining(
+            String title,
+            Pageable pageable); --only this is defined in repository
+    
+    Pageable firstPageTenRecords =
+                PageRequest.of(0,10);
+
+        List<Course> courses =
+                courseRepository.findByTitleContaining(
+                        "D",
+                        firstPageTenRecords).getContent();
+
+15. 
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "studen_course_map",
+            joinColumns = @JoinColumn(
+                    name = "course_id",
+                    referencedColumnName = "courseId"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "studentId"
+            )
+    )
+    private List<Student> students;
+
+    public void addStudents(Student student){
+        if(students == null) students = new ArrayList<>();
+        students.add(student);
+    }
 
 
 
