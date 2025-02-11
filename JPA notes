@@ -66,12 +66,27 @@ https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
   (refer daily code buffer video timestamp- 1:36:00)
   
 
-14. 
+14. Paging and Sorting
+
+  a.  Pageable firstPagewithThreeRecords =
+                PageRequest.of(0, 3);
+        Pageable secondPageWithTwoRecords = 
+                PageRequest.of(1,2);
+
+        List<Course> courses =
+                courseRepository.findAll(secondPageWithTwoRecords)
+                        .getContent();
+
+        long totalElements =
+                courseRepository.findAll(secondPageWithTwoRecords)
+                .getTotalElements();
+
+        long totalPages =
+                courseRepository.findAll(secondPageWithTwoRecords)
+                .getTotalPages();
 
 
-
-
-
+  b.
 
 
 
